@@ -121,8 +121,12 @@ else
   > ".eslintrc${config_extension}" # truncates existing file (or creates empty)
 
   echo ${config_opening}'
-  "extends": [
+   "extends": [
     "airbnb",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:prettier/recommended",
     "prettier/react"
   ],
@@ -133,9 +137,22 @@ else
     "jest": true,
     "node": true
   },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "cache": true
+  },
   "rules": {
+    "no-underscore-dangle": "off",
+    "no-unused-vars": [
+      "warn",
+      { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+    ],
     "jsx-a11y/href-no-hash": ["off"],
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
     "max-len": [
       "warn",
       {
